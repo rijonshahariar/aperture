@@ -1,7 +1,3 @@
-<div align="center">
-
-![APERTURE](https://github.com/user-attachments/assets/74564f36-a574-4f84-91d0-a7c98a29a14f)
-
 # 🌌 APERTURE
 
 ### *NASA Space Apps Challenge 2025*
@@ -107,10 +103,10 @@ Built with modern technologies for optimal performance, featuring server-side re
 
 ## 🏗️ Architecture
 
-AstroVista is built as a streamlined monorepo using **Turborepo** for efficient development and deployment:
+APERTURE is built as a streamlined monorepo using **Turborepo** for efficient development and deployment:
 
 ```
-astrovista/
+APERTURE/
 ├── apps/
 │   └── web/          # Next.js frontend application
 ├── packages/
@@ -143,8 +139,8 @@ astrovista/
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/FernaandoJr/AstroVista.git
-   cd AstroVista
+   git clone https://github.com/rijonshahariar/APERTURE.git
+   cd APERTURE
    ```
 
 2. **Install dependencies**
@@ -182,7 +178,7 @@ astrovista/
 
 ### **Direct API Access**
 
-AstroVista integrates directly with NASA's Astronomy Picture of the Day API:
+APERTURE integrates directly with NASA's Astronomy Picture of the Day API:
 
 ```
 Base URL: https://api.nasa.gov/planetary/apod
@@ -269,30 +265,10 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
 
 <div align="center">
 
-![GitHub language count](https://img.shields.io/github/languages/count/fernaandojr/astrovista?style=for-the-badge)
-![GitHub top language](https://img.shields.io/github/languages/top/fernaandojr/astrovista?style=for-the-badge&color=blue)
-![GitHub code size](https://img.shields.io/github/languages/code-size/fernaandojr/astrovista?style=for-the-badge&color=green)
-![GitHub last commit](https://img.shields.io/github/last-commit/fernaandojr/astrovista?style=for-the-badge&color=red)
-
-</div>
-
----
-
-## 💬 Community & Support
-
-<div align="center">
-
-### **Join Our Community**
-
-[![Discord](https://img.shields.io/badge/Discord-Join_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/kkeKKeASaW)
-[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/FernaandoJr/AstroVista/discussions)
-
-**Get Help & Connect**
-
-- 💬 **Discord**: Real-time chat and community support
-- 🐛 **Issues**: Bug reports and feature requests
-- 💡 **Discussions**: General questions and ideas
-- 📧 **Email**: For private inquiries
+![GitHub language count](https://img.shields.io/github/languages/count/rijonshahariar/APERTURE?style=for-the-badge)
+![GitHub top language](https://img.shields.io/github/languages/top/rijonshahariar/APERTURE?style=for-the-badge&color=blue)
+![GitHub code size](https://img.shields.io/github/languages/code-size/rijonshahariar/APERTURE?style=for-the-badge&color=green)
+![GitHub last commit](https://img.shields.io/github/last-commit/rijonshahariar/APERTURE?style=for-the-badge&color=red)
 
 </div>
 
@@ -312,19 +288,4 @@ This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE
 - 📚 **Open Source**: The amazing open-source community
 
 ---
-
-<div align="center">
-
-### **Made with ❤️ by [FernaandoJr](https://github.com/FernaandoJr)**
-
-_Exploring the universe, one picture at a time_ 🌌
-
-[![GitHub followers](https://img.shields.io/github/followers/fernaandojr?style=social)](https://github.com/FernaandoJr)
-[![Twitter Follow](https://img.shields.io/twitter/follow/fernaandojr?style=social)](https://twitter.com/fernaandojr)
-
----
-
-**⭐ If you find AstroVista helpful, please consider giving it a star!**
-
-</div>
 

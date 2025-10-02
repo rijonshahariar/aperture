@@ -37,7 +37,7 @@ const footerLinks: FooterSection[] = [
       },
       {
         title: 'Github (Source code)',
-        href: 'https://github.com/FernaandoJr/astrovista',
+        href: 'https://github.com/rijonshahariar/astrovista',
         icon: SiGithub,
       },
       { title: 'X/Twitter', href: '#', icon: SiX },
