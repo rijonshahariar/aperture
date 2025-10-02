@@ -32,12 +32,12 @@ const footerLinks: FooterSection[] = [
     links: [
       {
         title: 'Instagram',
-        href: 'https://instagram.com/astrovista.app/',
+        href: 'https://instagram.com/Aperture.app/',
         icon: SiInstagram,
       },
       {
         title: 'Github (Source code)',
-        href: 'https://github.com/rijonshahariar/astrovista',
+        href: 'https://github.com/rijonshahariar/Aperture',
         icon: SiGithub,
       },
       { title: 'X/Twitter', href: '#', icon: SiX },
@@ -54,7 +54,7 @@ export function Footer() {
         <AnimatedContainer className="space-y-4">
           <PlanetLogo size={36} />
           <p className="text-muted-foreground mt-8 text-sm md:mt-0">
-            © {new Date().getFullYear()} AstroVista. All rights reserved.
+            © {new Date().getFullYear()} Aperture. All rights reserved.
           </p>
         </AnimatedContainer>
 

@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://astrovista.vercel.app'
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://Aperture.vercel.app'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static routes
@@ -43,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${nasaApiKey}&count=10`, {
       headers: {
-        'User-Agent': 'AstroVista-Sitemap/1.0',
+        'User-Agent': 'Aperture-Sitemap/1.0',
       },
     })
 
