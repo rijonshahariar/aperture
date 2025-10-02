@@ -31,7 +31,7 @@ export default function GalleryCard({
   media_type: string
   toggleFavorite: (date: string) => void
 }) {
-  const truncatedExplanation = truncateText(explanation, 150)
+  //const truncatedExplanation = truncateText(explanation, 150)
   const [isFavorite, setIsFavorite] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
 

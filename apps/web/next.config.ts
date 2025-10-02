@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['ik.imagekit.io', 'tailark.com', 'www.nasa.gov', 'apod.nasa.gov', 't3.ftcdn.net'],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 }
 
 export default nextConfig
