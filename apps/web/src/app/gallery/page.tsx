@@ -30,9 +30,7 @@ export default function GalleryPage() {
         ) : search && search.apods.length > 0 ? (
           <>
             <ApodGallery data={search} />
-            <div className="w-full flex justify-center mt-8">
-              <GalleryPagination gallery={search} />
-            </div>
+           
           </>
         ) : isFetched && search && search.apods.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">

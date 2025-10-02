@@ -10,9 +10,9 @@ export const HeroHeader = () => {
   const [menuState, setMenuState] = useState(false)
 
   const menuItems = [
-    { name: 'Apod', href: '/apod' },
+    { name: 'Picture of The Day', href: '/apod' },
     { name: 'Gallery', href: '/gallery' },
-    { name: 'Favorites', href: '/favorites' },
+    { name: 'My Favorites', href: '/favorites' },
   ]
 
   return (
@@ -26,7 +26,7 @@ export const HeroHeader = () => {
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
             <div className="flex w-full items-center justify-between gap-12 md:w-auto">
               <Link href="/" aria-label="home" className="flex items-center space-x-2">
-                <PlanetLogo size={28} className="hover:text-accent-foreground" />
+                <PlanetLogo size={52} className="hover:text-accent-foreground" /> 
               </Link>
 
               <button

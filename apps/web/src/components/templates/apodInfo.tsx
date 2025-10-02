@@ -20,7 +20,7 @@ export default function ApodInfo({ data, hasController = false }: Readonly<APodI
 
   return (
     <div className="container mx-auto flex flex-col items-center px-4">
-      <h1 className="mb-4 text-3xl font-bold select-none sm:text-4xl lg:text-5xl">
+      <h1 className="mb-5 text-3xl font-bold select-none sm:text-4xl lg:text-5xl">
         Astronomy Picture of the Day
       </h1>
 

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { AnimatedGroup } from '../ui/animatedGroup'
 import { Button } from '../ui/button'
+import { Starfield } from './starfield'
 
 export default function HomeHeroSection() {
   const transitionVariants = {
@@ -27,6 +28,7 @@ export default function HomeHeroSection() {
 
   return (
     <div className="relative">
+
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 isolate z-[2] hidden opacity-50 contain-strict md:block">
@@ -35,8 +37,10 @@ export default function HomeHeroSection() {
         <div className="absolute top-0 left-0 h-[80rem] w-56 -translate-y-[350px] -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
       </div>
 
+      <Starfield/>
+
       <section>
-        <div className="relative pt-24 md:pt-36">
+        <div className="relative z-10 pt-24 md:pt-36">
           <div
             aria-hidden
             className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--background)_75%)]"
@@ -65,11 +69,11 @@ export default function HomeHeroSection() {
                 </Link>
 
                 <h1 className="mx-auto mt-8 max-w-4xl text-4xl text-balance sm:text-5xl md:text-6xl lg:mt-16 lg:text-7xl xl:text-[5.25rem]">
-                  The Beauty of Space, Simplified.
+                  Embiggen Your Eyes, Beyond.
                 </h1>
                 <p className="mx-auto mt-6 max-w-2xl text-base text-balance sm:mt-8 sm:text-lg">
                   {
-                    "A modern and fast interface to explore NASA's Astronomy Picture of the Day. Built for space enthusiasts and the curious."
+                    "Every Aperture Frames a Story. With Eyes Wide Open, You Capture The Infinite Canvas of The Cosmos."
                   }
                 </p>
               </AnimatedGroup>
@@ -90,11 +94,11 @@ export default function HomeHeroSection() {
                 <div key={1} className="bg-foreground/10 rounded-[14px] border p-0.5">
                   <Button asChild size="lg" className="rounded-xl px-5 text-base">
                     <Link href="/gallery">
-                      <span className="text-nowrap">Explore the Full Gallery</span>
+                      <span className="text-nowrap">Explore the Galaxy ✨</span>
                     </Link>
                   </Button>
                 </div>
-                <Button
+                {/* <Button
                   key={2}
                   asChild
                   size="lg"
@@ -103,7 +107,7 @@ export default function HomeHeroSection() {
                   <Link href="/about">
                     <span className="text-nowrap">About the Project</span>
                   </Link>
-                </Button>
+                </Button> */}
               </AnimatedGroup>
             </div>
           </div>
@@ -129,7 +133,7 @@ export default function HomeHeroSection() {
                 <div className="relative aspect-video w-full md:aspect-[3/2] lg:aspect-[15/8]">
                   <Image
                     className="bg-background rounded-2xl object-cover"
-                    src="https://www.nasa.gov/wp-content/uploads/2023/03/main_image_star-forming_region_carina_nircam_final-5mb.jpg"
+                    src="https://t3.ftcdn.net/jpg/05/69/50/94/360_F_569509426_h8Egg7FMmC3EatbhdA8B2OtvUZRyw8cR.jpg"
                     alt="app screen"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
@@ -141,6 +145,7 @@ export default function HomeHeroSection() {
           </AnimatedGroup>
         </div>
       </section>
+      
     </div>
   )
 }
