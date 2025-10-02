@@ -64,9 +64,9 @@ export default function GalleryCard({
   }, [date])
 
   return (
-    <Card className="flex w-full max-w-[18rem] min-w-[15rem] flex-col overflow-hidden">
+    <Card className="flex w-full max-w-[22rem] min-w-[18rem] flex-col overflow-hidden">
       <CardContent className="flex-grow p-0">
-        <div className="relative aspect-video overflow-hidden">
+        <div className="relative aspect-[4/3] overflow-hidden">
           {media_type === 'image' ? (
             <>
               {!imageLoaded && (
@@ -108,7 +108,7 @@ export default function GalleryCard({
           <div className="text-pretty">
             <h2 className="mb-2 text-2xl font-semibold">{truncatedTitle}</h2>
             <p className="text-muted-foreground flex-grow text-sm">{formattedDate}</p>
-            <p className="text-muted-foreground flex-grow text-sm">{truncatedExplanation}</p>
+            {/* <p className="text-muted-foreground flex-grow text-sm">{truncatedExplanation}</p> */}
           </div>
         </div>
       </CardContent>
