@@ -1,6 +1,5 @@
 'use client'
 import GalleryInputs from '@/components/blocks/galleryInputs'
-import { GalleryPagination } from '@/components/blocks/galleryPagination'
 import GallerySkeleton from '@/components/skeleton/gallerySkeleton'
 import ApodGallery from '@/components/templates/gallery'
 import { useGallery } from '@/hooks'

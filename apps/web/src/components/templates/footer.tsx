@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'motion/react'
 import type { ComponentProps, ReactNode } from 'react'
 import React from 'react'
 
-import { SiGithub, SiHashnode, SiInstagram, SiX } from '@icons-pack/react-simple-icons'
+import { SiHashnode } from '@icons-pack/react-simple-icons'
 import PlanetLogo from '../ui/planetLogo'
 
 interface FooterLink {
