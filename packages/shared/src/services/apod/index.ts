@@ -133,44 +133,70 @@ export class ApodService {
       } else {
         // No specific date range - fetch different dates for each page
         const today = new Date()
+        let collectedApods: APOD[] = []
+        let daysToFetch = perPage
+        let attempts = 0
+        const maxAttempts = 5 // Prevent infinite loops
         
-        // Calculate date range for this specific page
-        // Page 1: days 0-9 ago, Page 2: days 10-19 ago, etc.
-        const daysBackEnd = (page - 1) * perPage
-        const daysBackStart = page * perPage - 1
-        
-        const pageEndDate = new Date(today)
-        pageEndDate.setDate(pageEndDate.getDate() - daysBackEnd)
-        
-        const pageStartDate = new Date(today)
-        pageStartDate.setDate(pageStartDate.getDate() - daysBackStart)
-        
-        searchStartDate = pageStartDate.toISOString().split('T')[0]!
-        searchEndDate = pageEndDate.toISOString().split('T')[0]!
-        
-        // Fetch data for this page's date range
-        let apods = await this.getDateRange(searchStartDate, searchEndDate)
+        // Keep fetching until we have enough images or reach max attempts
+        while (collectedApods.length < perPage && attempts < maxAttempts) {
+          attempts++
+          
+          // Calculate date range for this fetch
+          const daysBackEnd = (page - 1) * perPage + (attempts - 1) * daysToFetch
+          const daysBackStart = daysBackEnd + daysToFetch - 1
+          
+          const pageEndDate = new Date(today)
+          pageEndDate.setDate(pageEndDate.getDate() - daysBackEnd)
+          
+          const pageStartDate = new Date(today)
+          pageStartDate.setDate(pageStartDate.getDate() - daysBackStart)
+          
+          searchStartDate = pageStartDate.toISOString().split('T')[0]!
+          searchEndDate = pageEndDate.toISOString().split('T')[0]!
+          
+          try {
+            // Fetch data for this date range
+            let fetchedApods = await this.getDateRange(searchStartDate, searchEndDate)
 
-        // Filter by media type
-        if (mediaType && (mediaType === 'image' || mediaType === 'video')) {
-          apods = apods.filter(apod => apod.media_type === mediaType)
+            // Filter by media type
+            if (mediaType && (mediaType === 'image' || mediaType === 'video')) {
+              fetchedApods = fetchedApods.filter(apod => apod.media_type === mediaType)
+            }
+
+            // Filter by query (search in title and explanation)
+            if (query) {
+              const queryLower = query.toLowerCase()
+              fetchedApods = fetchedApods.filter(apod => 
+                apod.title.toLowerCase().includes(queryLower) ||
+                apod.explanation.toLowerCase().includes(queryLower)
+              )
+            }
+
+            // Add to collected APODs, avoiding duplicates
+            const existingDates = new Set(collectedApods.map(apod => apod.date))
+            const newApods = fetchedApods.filter(apod => !existingDates.has(apod.date))
+            collectedApods.push(...newApods)
+            
+            // If we still don't have enough, increase the fetch size for next attempt
+            if (collectedApods.length < perPage) {
+              daysToFetch = Math.ceil(daysToFetch * 1.5) // Increase by 50%
+            }
+          } catch (error) {
+            console.warn(`Failed to fetch APODs for range ${searchStartDate} to ${searchEndDate}:`, error)
+            daysToFetch = Math.ceil(daysToFetch * 1.5) // Increase range and try again
+          }
         }
 
-        // Filter by query (search in title and explanation)
-        if (query) {
-          const queryLower = query.toLowerCase()
-          apods = apods.filter(apod => 
-            apod.title.toLowerCase().includes(queryLower) ||
-            apod.explanation.toLowerCase().includes(queryLower)
-          )
-        }
-
-        // Sort
+        // Sort the collected APODs
         if (sort === 'date_asc') {
-          apods.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+          collectedApods.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
         } else {
-          apods.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          collectedApods.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
         }
+
+        // Take exactly perPage items
+        const finalApods = collectedApods.slice(0, perPage)
 
         // For open-ended search, estimate total pages
         const estimatedTotalRecords = 1000 // APOD has been running since 1995
@@ -182,15 +208,15 @@ export class ApodService {
           page,
           perPage,
           sort,
-          hasNextPage: page < totalPages && apods.length > 0,
+          hasNextPage: page < totalPages && finalApods.length === perPage,
           hasPreviousPage: page > 1,
           links: {
-            next: page < totalPages && apods.length > 0 ? `?page=${page + 1}` : null,
+            next: page < totalPages && finalApods.length === perPage ? `?page=${page + 1}` : null,
             previous: page > 1 ? `?page=${page - 1}` : null,
             first: `?page=1`,
             last: `?page=${totalPages}`
           },
-          apods: apods.slice(0, perPage) // Ensure we don't exceed perPage
+          apods: finalApods
         }
       }
     } catch (error) {
@@ -199,15 +225,20 @@ export class ApodService {
   }
 
   async getAll(): Promise<APOD[]> {
-    // Get only last 10 days for initial load (much faster)
+    // Get last 30 days to ensure we have enough data after filtering
     const end = new Date()
     const start = new Date()
-    start.setDate(start.getDate() - 10)
+    start.setDate(start.getDate() - 30)
     
-    return this.getDateRange(
+    const apods = await this.getDateRange(
       start.toISOString().split('T')[0]!,
       end.toISOString().split('T')[0]!
     )
+    
+    // Return sorted by date (newest first) and limit to 10
+    return apods
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 10)
   }
 
   // New method for paginated recent APODs
