@@ -21,7 +21,7 @@ export function ModeToggle({ rounded = false }: DarkModeProps) {
   }, [])
 
   React.useEffect(() => {
-    const userTheme = localStorage.getItem('theme') || 'light'
+    const userTheme = localStorage.getItem('theme') || 'dark'
     setTheme(userTheme)
   }, [setTheme])
 

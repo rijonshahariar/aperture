@@ -53,6 +53,35 @@ export async function generateMetadata({
   }
 }
 
-export default function Page() {
-  return null
+import ApodInfo from '@/components/templates/apodInfo'
+
+export default async function Page({ params }: { params: Promise<{ date: string }> }) {
+  const { date } = await params
+
+  try {
+    const apodService = new ApodService(nasaApiKey)
+    const data = await apodService.getByDate(date)
+
+    if (!data) {
+      return (
+        <div className="container mx-auto px-4 py-24 text-center">
+          <h1 className="text-2xl font-bold mb-4">APOD Not Found</h1>
+          <p className="text-muted-foreground">
+            No Astronomy Picture of the Day was found for {date}.
+          </p>
+        </div>
+      )
+    }
+
+    return <ApodInfo data={data} />
+  } catch (error) {
+    return (
+      <div className="container mx-auto px-4 py-24 text-center">
+        <h1 className="text-2xl font-bold mb-4">Error Loading APOD</h1>
+        <p className="text-muted-foreground">
+          There was an error loading the Astronomy Picture of the Day for {date}.
+        </p>
+      </div>
+    )
+  }
 }

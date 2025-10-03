@@ -21,7 +21,7 @@ const footerLinks: FooterSection[] = [
   {
     label: 'Navigation',
     links: [
-      { title: 'Apod', href: '/apod' },
+      { title: 'Picture of The Day', href: '/apod' },
       { title: 'Gallery', href: '/gallery' },
       { title: 'Favorites', href: '/favorites' },
     ],
