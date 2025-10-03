@@ -158,10 +158,10 @@ export default function LuckyPage() {
                 
                 <CardContent className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
+                    <div className="space-y-2 mx-auto">
                       {/* <label className="text-sm font-medium text-foreground">Birth Month</label> */}
                       <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-                        <SelectTrigger className="h-12">
+                        <SelectTrigger className="h-12 w-full">
                           <SelectValue placeholder="Select month" />
                         </SelectTrigger>
                         <SelectContent>
@@ -174,10 +174,10 @@ export default function LuckyPage() {
                       </Select>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 mx-auto">
                       {/* <label className="text-sm font-medium text-foreground">Birth Day</label> */}
                       <Select value={selectedDay} onValueChange={setSelectedDay}>
-                        <SelectTrigger className="h-12">
+                        <SelectTrigger className="h-12 w-full">
                           <SelectValue placeholder="Select day" />
                         </SelectTrigger>
                         <SelectContent>

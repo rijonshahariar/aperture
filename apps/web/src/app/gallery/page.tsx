@@ -11,7 +11,7 @@ export default function GalleryPage() {
 
   return (
     <Suspense fallback={<GallerySkeleton />}>
-      <div className="container mx-auto flex flex-col items-center pt-24 pb-4">
+      <div className="container mx-auto flex flex-col items-center pt-30 pb-4">
         <h1 className="text-3xl font-bold select-none">Gallery</h1>
         <GalleryInputs />
       </div>

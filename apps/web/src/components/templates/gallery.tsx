@@ -17,18 +17,20 @@ export default function ApodGallery({ data }: { data: PaginatedAPODResponse }) {
   return (
     <div className="flex flex-col gap-4">
       <GalleryPagination gallery={data} />
-      <div className="container flex flex-wrap justify-center gap-4 px-4">
-        {data.apods.map((item) => (
-          <GalleryCard
-            key={item.date}
-            date={item.date}
-            explanation={item.explanation}
-            url={item.url ?? ''}
-            title={item.title}
-            media_type={item.media_type}
-            toggleFavorite={toggleFavorite}
-          />
-        ))}
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center max-w-6xl mx-auto">
+          {data.apods.map((item) => (
+            <GalleryCard
+              key={item.date}
+              date={item.date}
+              explanation={item.explanation}
+              url={item.url ?? ''}
+              title={item.title}
+              media_type={item.media_type}
+              toggleFavorite={toggleFavorite}
+            />
+          ))}
+        </div>
       </div>
       <GalleryPagination gallery={data} />
     </div>
