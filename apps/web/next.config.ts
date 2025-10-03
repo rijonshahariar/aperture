@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    domains: ['ik.imagekit.io', 'tailark.com', 'www.nasa.gov', 'apod.nasa.gov', 't3.ftcdn.net'],
+    domains: ['ik.imagekit.io', 'tailark.com', 'www.nasa.gov', 'apod.nasa.gov', 't3.ftcdn.net', 'i.pinimg.com'],
   },
   eslint: {
     ignoreDuringBuilds: true,

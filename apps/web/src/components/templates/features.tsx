@@ -1,4 +1,4 @@
-import { BarChart2, Database, Library, Star } from 'lucide-react'
+import { Archive, CodeIcon, Heart, SearchCheck } from 'lucide-react'
 import { BentoGrid, BentoItem } from '../blocks/bentoGrid'
 import { AnimatedGroup } from '../ui/animatedGroup'
 
@@ -7,8 +7,8 @@ export default function FeaturesSection() {
     {
       title: 'Complete NASA APOD Archive',
       description:
-        'Access our complete archive containing every single NASA Astronomy Picture of the Day since 1995, with advanced search capabilities, scientific explanations.',
-      icon: <Library className="text-primary h-6 w-6" />,
+        'Dive into the full NASA Astronomy Picture of the Day archive, spanning back to 1995. Complete with powerful search tools and detailed scientific insights.',
+      icon: <Archive className="text-primary h-6 w-6" />,
       tags: ['Archive', 'Search', 'Metadata', 'Collections'],
       colSpan: 2,
       rowSpan: 2,
@@ -16,8 +16,8 @@ export default function FeaturesSection() {
     {
       title: 'Personal Collection',
       description:
-        'Create your own curated collection of cosmic wonders with our favorite system. Save images, organize them into custom albums, add personal notes, and share your collections with friends or the community.',
-      icon: <Star className="h-6 w-6 text-amber-500" />,
+        'Build your own cosmic gallery with our favorites system. Save breathtaking images, organize them into custom albums, add personal notes, and share your collection with the community',
+      icon: <Heart className="h-6 w-6 text-amber-500" />,
       tags: ['Favorites', 'Collections', 'Sharing'],
       colSpan: 1,
       rowSpan: 2,
@@ -25,8 +25,8 @@ export default function FeaturesSection() {
     {
       title: 'Advanced Searching and Filtering Tools ',
       description:
-        'Utilize our powerful search and filtering tools to explore the archive by date, tags, image type, and more. Find specific images or discover new favorites with ease.',
-      icon: <BarChart2 className="h-6 w-6 text-purple-500" />,
+        'Explore the archive with powerful search and filtering tools. Browse by date, tags, or media type to find exactly what you’re looking for, or uncover new cosmic favorites along the way.',
+      icon: <SearchCheck className="h-6 w-6 text-purple-500" />,
       tags: ['Search', 'Filter', 'Discovery'],
       colSpan: 1,
       rowSpan: 1,
@@ -34,8 +34,8 @@ export default function FeaturesSection() {
     {
       title: 'Developer Platform',
       description:
-        'Build on our open API platform with comprehensive documentation. Create your own astronomical applications, or consume our API to integrate with your projects. Webhooks and SDKs available for seamless integration.',
-      icon: <Database className="h-6 w-6 text-gray-500" />,
+        'Build with our open API, complete with clear documentation, webhooks, and SDKs. Create your own astronomy apps or integrate cosmic data directly into your projects with ease.',
+      icon: <CodeIcon className="h-6 w-6 text-gray-500" />,
       tags: ['API', 'SDK', 'Webhooks', 'Integration'],
       colSpan: 2,
       rowSpan: 1,

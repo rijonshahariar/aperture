@@ -103,7 +103,7 @@ export default function HomeHeroSection() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="h-10.5 rounded-xl px-5">
+                  className="h-10.5 rounded-xl text-base px-5">
                   <Link href="/lucky">
                     <span className="text-nowrap">I'm Feeling Lucky</span>
                   </Link>
@@ -133,7 +133,7 @@ export default function HomeHeroSection() {
                 <div className="relative aspect-video w-full md:aspect-[3/2] lg:aspect-[15/8]">
                   <Image
                     className="bg-background rounded-2xl object-cover"
-                    src="https://t3.ftcdn.net/jpg/05/69/50/94/360_F_569509426_h8Egg7FMmC3EatbhdA8B2OtvUZRyw8cR.jpg"
+                    src="https://i.pinimg.com/originals/ca/4d/23/ca4d2391455ade48053c0b6861842574.gif"
                     alt="app screen"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
