@@ -41,7 +41,7 @@ const footerLinks: FooterSection[] = [
         icon: SiHashnode,
       },
       
-      { title: 'Bushra Nuzaifa', href: '#', icon: SiHashnode },
+      { title: 'Bushra Mohammed Harun', href: '#', icon: SiHashnode },
       { title: 'Jannatul Ferdous', href: '#', icon: SiHashnode },
     ],
   },
