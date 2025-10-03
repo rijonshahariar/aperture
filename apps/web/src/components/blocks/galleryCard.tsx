@@ -35,8 +35,13 @@ export default function GalleryCard({
   const [isFavorite, setIsFavorite] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const [imageHeight, setImageHeight] = useState(300) // Default height
+  const [imageWidth, setImageWidth] = useState(400) // Default width
 
-  const handleImageLoad = () => {
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = event.target as HTMLImageElement
+    setImageWidth(img.naturalWidth)
+    setImageHeight(img.naturalHeight)
     setImageLoaded(true)
   }
 
@@ -48,6 +53,8 @@ export default function GalleryCard({
 
   useEffect(() => {
     setImageLoaded(false)
+    setImageHeight(300) // Reset to default height
+    setImageWidth(400) // Reset to default width
   }, [url])
 
   const truncatedTitle = truncateText(title, 50)
@@ -64,11 +71,17 @@ export default function GalleryCard({
     setIsFavorite(checkFavorite(date))
   }, [date])
 
+  // Calculate dynamic height based on image aspect ratio for masonry
+  const cardWidth = 320 // Fixed card width - increased from 280
+  const aspectRatio = imageWidth / imageHeight
+  const calculatedHeight = Math.min(Math.max(cardWidth / aspectRatio, 200), 450) // Min 200px, max 450px
+
   return (
-    <Card className="group relative flex w-full max-w-[22rem] min-w-[22rem] flex-col overflow-hidden cursor-pointer">
+    <Card className="group relative flex w-full max-w-md flex-col overflow-hidden cursor-pointer break-inside-avoid mb-4">
       <CardContent className="flex-grow p-0">
         <div 
-          className="relative aspect-[4/3] overflow-hidden"
+          className="relative overflow-hidden"
+          style={{ height: imageLoaded ? `${calculatedHeight}px` : '300px' }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -93,14 +106,14 @@ export default function GalleryCard({
               />
             </>
           ) : url ? (
-            <div className="">
+            <div className="h-full">
               <ReactPlayer
                 src={url}
                 controls={false}
                 loop={false}
                 playing={false}
-                height={'170px'}
-                width={'100%'}
+                height="100%"
+                width="100%"
               />
             </div>
           ) : (

@@ -1,6 +1,7 @@
 import { PaginatedAPODResponse } from '@repo/shared'
 import GalleryCard from '../blocks/galleryCard'
 import { GalleryPagination } from '../blocks/galleryPagination'
+import Masonry from 'react-masonry-css'
 
 export default function ApodGallery({ data }: { data: PaginatedAPODResponse }) {
   const toggleFavorite = (date: string) => {
@@ -14,11 +15,23 @@ export default function ApodGallery({ data }: { data: PaginatedAPODResponse }) {
     localStorage.setItem('favoritesApod', JSON.stringify(favoritesArray))
   }
 
+  // Responsive breakpoint configuration for masonry columns
+  const breakpointColumnsObj = {
+    default: 3,
+    1200: 3,
+    1024: 2,
+    640: 1
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <GalleryPagination gallery={data} />
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center max-w-6xl mx-auto">
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
           {data.apods.map((item) => (
             <GalleryCard
               key={item.date}
@@ -30,7 +43,7 @@ export default function ApodGallery({ data }: { data: PaginatedAPODResponse }) {
               toggleFavorite={toggleFavorite}
             />
           ))}
-        </div>
+        </Masonry>
       </div>
       <GalleryPagination gallery={data} />
     </div>

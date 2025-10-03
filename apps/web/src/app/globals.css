@@ -188,3 +188,40 @@
     letter-spacing: var(--tracking-normal);
   }
 }
+
+/* Masonry Layout Styles */
+.my-masonry-grid {
+  display: flex;
+  margin-left: -20px; /* gutter size offset */
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 20px; /* gutter size */
+  background-clip: padding-box;
+  width: 100% !important; /* Ensure columns take full available width */
+}
+
+/* Style your items */
+.my-masonry-grid_column > div {
+  margin-bottom: 20px;
+  break-inside: avoid;
+  width: 100%;
+  min-width: 320px; /* Minimum card width - increased */
+  max-width: 450px; /* Maximum card width - increased */
+}
+
+/* Responsive column counts */
+@media (max-width: 640px) {
+  .my-masonry-grid {
+    margin-left: -12px;
+  }
+  .my-masonry-grid_column {
+    padding-left: 12px;
+  }
+  .my-masonry-grid_column > div {
+    margin-bottom: 16px;
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
