@@ -29,8 +29,12 @@ const days = Array.from({ length: 31 }, (_, i) => ({
   label: String(i + 1),
 }))
 
-// Available years to choose from
-const availableYears = [2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010]
+// Years from 1995 (when APOD started) to current year
+const currentYear = new Date().getFullYear()
+const years = Array.from({ length: currentYear - 1994 }, (_, i) => ({
+  value: String(currentYear - i),
+  label: String(currentYear - i),
+}))
 
 // Zodiac sign function
 const getZodiacSign = (month: string, day: string): string => {
@@ -54,13 +58,13 @@ const getZodiacSign = (month: string, day: string): string => {
 export default function LuckyPage() {
   const [selectedMonth, setSelectedMonth] = useState<string>('')
   const [selectedDay, setSelectedDay] = useState<string>('')
+  const [selectedYear, setSelectedYear] = useState<string>('')
   const [isLoading, setIsLoading] = useState(false)
   const [apodData, setApodData] = useState<APOD | null>(null)
-  const [selectedYear, setSelectedYear] = useState<number | null>(null)
   const [error, setError] = useState<string>('')
 
   const handleDiscoverClick = async () => {
-    if (!selectedMonth || !selectedDay) return
+    if (!selectedMonth || !selectedDay || !selectedYear) return
 
     setIsLoading(true)
     setError('')
@@ -68,30 +72,18 @@ export default function LuckyPage() {
     try {
       const apodService = new ApodService(nasaApiKey)
       
-      // Try to find an APOD for the birthday in one of the available years
-      let foundApod: APOD | null = null
-      let foundYear: number | null = null
+      // Create the exact birthdate string
+      const birthdateString = `${selectedYear}-${selectedMonth}-${selectedDay}`
       
-      for (const year of availableYears) {
-        try {
-          const dateString = `${year}-${selectedMonth}-${selectedDay}`
-          const data = await apodService.getByDate(dateString)
-          if (data) {
-            foundApod = data
-            foundYear = year
-            break
-          }
-        } catch (err) {
-          // Continue to next year if this one fails
-          continue
+      try {
+        const data = await apodService.getByDate(birthdateString)
+        if (data) {
+          setApodData(data)
+        } else {
+          setError('Sorry, No images found on your birthday')
         }
-      }
-      
-      if (foundApod && foundYear) {
-        setApodData(foundApod)
-        setSelectedYear(foundYear)
-      } else {
-        setError('No Hubble image found for your birthday in the available years.')
+      } catch (err) {
+        setError('Sorry, No images found on your birthday')
       }
     } catch (err) {
       setError('Failed to fetch your birthday image. Please try again.')
@@ -102,20 +94,20 @@ export default function LuckyPage() {
 
   const handleReset = () => {
     setApodData(null)
-    setSelectedYear(null)
     setError('')
     setSelectedMonth('')
     setSelectedDay('')
+    setSelectedYear('')
   }
 
-  const isFormValid = selectedMonth && selectedDay
+  const isFormValid = selectedMonth && selectedDay && selectedYear
   const zodiacSign = selectedMonth && selectedDay ? getZodiacSign(selectedMonth, selectedDay) : ''
   const monthName = selectedMonth ? months.find(m => m.value === selectedMonth)?.label : ''
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
       <div className="container mx-auto px-4 pt-24 pb-12">
-        {!apodData ? (
+        {!apodData && !error ? (
           // Birthday selection form
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -139,7 +131,7 @@ export default function LuckyPage() {
               
               <p className="text-lg text-muted-foreground max-w-xl mx-auto">
                 Hubble Space Telescope has been capturing awe-inspiring images of the cosmos since its launch in 1990. 
-                So get ready to blast off into the stars and explore Hubble's birthday photo on your special day!
+                Enter your exact birth date to see what cosmic wonder was captured on your special day!
               </p>
             </div>
 
@@ -152,17 +144,16 @@ export default function LuckyPage() {
                 <CardHeader className="text-center pb-2">
                   <CardTitle className="flex items-center justify-center gap-2 text-2xl">
                     <Calendar className="w-6 h-6 text-primary" />
-                    Select Your Birthday
+                    Select Your Birth Date
                   </CardTitle>
                 </CardHeader>
                 
                 <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-2 mx-auto">
-                      {/* <label className="text-sm font-medium text-foreground">Birth Month</label> */}
                       <Select value={selectedMonth} onValueChange={setSelectedMonth}>
                         <SelectTrigger className="h-12 w-full">
-                          <SelectValue placeholder="Select month" />
+                          <SelectValue placeholder="Month" />
                         </SelectTrigger>
                         <SelectContent>
                           {months.map((month) => (
@@ -175,15 +166,29 @@ export default function LuckyPage() {
                     </div>
 
                     <div className="space-y-2 mx-auto">
-                      {/* <label className="text-sm font-medium text-foreground">Birth Day</label> */}
                       <Select value={selectedDay} onValueChange={setSelectedDay}>
                         <SelectTrigger className="h-12 w-full">
-                          <SelectValue placeholder="Select day" />
+                          <SelectValue placeholder="Day" />
                         </SelectTrigger>
                         <SelectContent>
                           {days.map((day) => (
                             <SelectItem key={day.value} value={day.value}>
                               {day.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2 mx-auto">
+                      <Select value={selectedYear} onValueChange={setSelectedYear}>
+                        <SelectTrigger className="h-12 w-full">
+                          <SelectValue placeholder="Year" />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-60">
+                          {years.map((year) => (
+                            <SelectItem key={year.value} value={year.value}>
+                              {year.label}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -247,7 +252,57 @@ export default function LuckyPage() {
               </p>
             </motion.div>
           </motion.div>
-        ) : (
+        ) : error ? (
+          // Error Display
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl mx-auto text-center"
+          >
+            <div className="mb-8">
+              <Button
+                onClick={handleReset}
+                variant="outline"
+                className="mb-6"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Try Another Date
+              </Button>
+
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                className="inline-flex items-center justify-center w-16 h-16 bg-red-500/10 rounded-full mb-6"
+              >
+                <Calendar className="w-8 h-8 text-red-500" />
+              </motion.div>
+              
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-red-500">
+                {error}
+              </h1>
+              
+              <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+                NASA's APOD archive doesn't have an image for {monthName} {parseInt(selectedDay)}, {selectedYear}. 
+                This could be due to weekends, holidays, or technical issues on that date.
+              </p>
+
+              {zodiacSign && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="mt-6"
+                >
+                  <p className="text-lg text-primary font-semibold">
+                    But hey, {zodiacSign}! ✨ Try a different date nearby.
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+        ) : apodData ? (
           // APOD Result Display
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -359,7 +414,7 @@ export default function LuckyPage() {
               </Card>
             </motion.div>
           </motion.div>
-        )}
+        ) : null}
       </div>
     </div>
   )
