@@ -99,6 +99,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1966077251551232"
+     crossOrigin="anonymous"></script>
+      </head>
       <body 
         className={`${outfitSans.variable} ${merriweather.variable} antialiased`}
         suppressHydrationWarning
