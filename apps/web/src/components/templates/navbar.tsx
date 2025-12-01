@@ -13,6 +13,7 @@ export const HeroHeader = () => {
     { name: 'Picture of The Day', href: '/apod' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'My Favorites', href: '/favorites' },
+    { name: 'Blog', href: '/blog' },
   ]
 
   return (

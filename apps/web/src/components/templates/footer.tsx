@@ -24,6 +24,7 @@ const footerLinks: FooterSection[] = [
       { title: 'Picture of The Day', href: '/apod' },
       { title: 'Gallery', href: '/gallery' },
       { title: 'Favorites', href: '/favorites' },
+      { title: 'Blog', href: '/blog' },
     ],
   },
 
@@ -73,9 +74,9 @@ export function Footer() {
           ))}
         </div>
       </div>
-      <div className="w-full flex justify-center mt-8">
+      {/* <div className="w-full flex justify-center mt-8">
         <span className="text-xs text-gray-400">Made with ❤️ Team DigiExperts for NASA Space Apps Hackathon</span>
-      </div>
+      </div> */}
     </footer>
   )
 }

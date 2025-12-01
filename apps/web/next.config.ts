@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // Remove MDX extensions since we're using static TSX files
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   turbopack: {
     rules: {
       '*.svg': {
@@ -10,7 +12,36 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    domains: ['ik.imagekit.io', 'tailark.com', 'www.nasa.gov', 'apod.nasa.gov', 't3.ftcdn.net', 'i.pinimg.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ik.imagekit.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'tailark.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.nasa.gov',
+      },
+      {
+        protocol: 'https',
+        hostname: 'apod.nasa.gov',
+      },
+      {
+        protocol: 'https',
+        hostname: 't3.ftcdn.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.pinimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
   },
   eslint: {
     ignoreDuringBuilds: true,
