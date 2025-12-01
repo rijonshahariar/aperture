@@ -28,12 +28,12 @@ const footerLinks: FooterSection[] = [
   },
 
   {
-    label: 'Team DigiExperts',
+    label: 'Legal & Support',
     links: [
-      { title: 'Ezaz Ahmed Sayem', href: '#', icon: SiHashnode },
-      { title: 'Shahariar Rijon', href: '#', icon: SiHashnode },
-      { title: 'Bushra Mohammed Harun', href: '#', icon: SiHashnode },
-      { title: 'Jannatul Ferdous', href: '#', icon: SiHashnode },
+      { title: 'About Us', href: '/about' },
+      { title: 'Contact Us', href: '/contact' },
+      { title: 'Privacy Policy', href: '/privacy' },
+      { title: 'Terms & Conditions', href: '/terms' },
     ],
   },
 ]
