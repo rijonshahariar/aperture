@@ -121,6 +121,26 @@ export default function RootLayout({
                 <GalleryParamsProvider>
                   <HeroHeader />
                   {children}
+
+                   <img
+          src="https://hitcounters.com/api/track.php?code=EDAEE28EE09E389E&px=1"
+          alt=""
+          width={1}
+          height={1}
+          style={{
+            position: "absolute",
+            width: "1px",
+            height: "1px",
+            border: 0,
+            visibility: "hidden",
+          }}
+        />
+
+        {/* Tracking script */}
+        <Script
+          src="https://hitcounters.com/api/tracker.js?code=EDAEE28EE09E389E"
+          strategy="afterInteractive"
+        />
                 </GalleryParamsProvider>
               </Suspense>
               <Footer />
