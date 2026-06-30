@@ -102,6 +102,8 @@ export default function RootLayout({
       <head>
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1966077251551232"
      crossOrigin="anonymous"></script>
+
+<script async src="https://hitcounters.com/api/tracker.js?code=EDAEE28EE09E389E"></script>
       </head>
       <body 
         className={`${outfitSans.variable} ${merriweather.variable} antialiased`}
