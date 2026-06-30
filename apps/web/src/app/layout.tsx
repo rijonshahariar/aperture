@@ -8,6 +8,7 @@ import { Merriweather, Outfit } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from 'react'
 import './globals.css'
+import Script from 'next/script'
 
 const outfitSans = Outfit({
   variable: '--font-outfit-sans',
